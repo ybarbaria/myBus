@@ -1,0 +1,16 @@
+<ion-content>
+  <ion-card>
+
+    <ion-card-header>
+      <ion-icon md="md-bus"></ion-icon>
+      {{nomArret}}
+    </ion-card-header>
+
+    <ion-item-group>
+      <ion-item-divider *ngFor="let time of listSchedule">
+        {{time.destination}} {{time.message}}
+      </ion-item-divider>
+    </ion-item-group>
+
+  </ion-card>
+</ion-content>
