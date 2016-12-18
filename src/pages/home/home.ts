@@ -34,7 +34,6 @@ export class HomePage implements AfterViewInit {
 
     this.srvSchedule.getSchedule().subscribe(
       result => {
-        debugger;
         this.listSchedule = result['schedules']
       }, //Bind to view
       err => {

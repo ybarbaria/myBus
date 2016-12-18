@@ -23,7 +23,6 @@ export class ScheduleService {
         });
     }
 
-
     public getBus(nameBuse: string): Promise<Object> {
               return new Promise((resolve, reject) => {
             NativeStorage.getItem(nameBuse)
