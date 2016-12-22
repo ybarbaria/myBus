@@ -6,9 +6,10 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SettingsPage } from '../pages/settings/settings.component';
+import { SettingsEditModal } from '../pages/settings/modal-settings.component';
 import { ScheduleService } from '../services/schedule.service';
 import { BusService } from '../services/bus.service';
-
+import { StorageService } from '../services/storage.service';
 
 @NgModule({
   declarations: [
@@ -17,14 +18,15 @@ import { BusService } from '../services/bus.service';
     ContactPage,
     HomePage,
     TabsPage,
-    SettingsPage
+    SettingsPage,
+    SettingsEditModal
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
       mode: 'md',
       iconMode: 'md',
-      modalEnter: 'modal-slide-in',
-      modalLeave: 'modal-slide-out',
+      // modalEnter: 'modal-slide-in',
+      // modalLeave: 'modal-slide-out',
       tabsPlacement: 'top',
       pageTransition: 'md'
     }, {}
@@ -36,11 +38,13 @@ import { BusService } from '../services/bus.service';
     ContactPage,
     HomePage,
     TabsPage,
-    SettingsPage
+    SettingsPage,
+    SettingsEditModal
   ],
   providers: [
     ScheduleService,
     BusService,
+    StorageService,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

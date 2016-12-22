@@ -1,20 +1,25 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { ModalController, Platform, NavParams, ViewController, NavController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
-import { Bus } from '../../models/bus'
-import { BusService } from '../../services/bus.service'
+import { Bus } from '../../models/bus';
+import { BusService } from '../../services/bus.service';
+import { StorageService } from '../../services/storage.service';
+import { SettingsEditModal } from './modal-settings.component';
 
 @Component({
     selector: 'settings',
-    templateUrl: 'settings.html'
+    templateUrl: 'settings.component.html'
 })
 export class SettingsPage implements AfterViewInit {
 
-    private _searchQuery: string = '';
     private _listBusStorage: Array<Bus>;
+    private _busSelected: Bus;
     listBus: Array<Bus>;
 
-    constructor(public navCtrl: NavController, private srvSchedule: BusService) {
+    constructor(public navCtrl: NavController,
+        private srvSchedule: BusService,
+        private srvStorage: StorageService,
+        public modalCtrl: ModalController) {
         this._initializeItemsBus();
     }
 
@@ -53,7 +58,12 @@ export class SettingsPage implements AfterViewInit {
 
 
     public onAddToFavorite(bus: Bus) {
-        console.log(bus);
-    }
+        this._busSelected = bus;
+        let favoriteBusModal = this.modalCtrl.create(SettingsEditModal, { bus: bus });
 
+        favoriteBusModal.present();
+
+        //this.srvStorage.storeBus(bus.line, bus.line, "", "");
+        //console.log(bus);
+    }
 }

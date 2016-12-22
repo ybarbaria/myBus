@@ -4,11 +4,11 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 @Injectable()
-export class ScheduleService {
+export class StorageService {
 
     constructor() { }
 
-    public storeBus(idBus: number, nameBus: string, station: string, terminus: string): Promise<boolean> {
+    public storeBus(idBus: string, nameBus: string, station: string, terminus: string): Promise<boolean> {
         return new Promise((resolve, reject) => {
             NativeStorage.setItem(nameBus, { busNumber: idBus, stationName: station, terminusName: terminus })
                 .then(
