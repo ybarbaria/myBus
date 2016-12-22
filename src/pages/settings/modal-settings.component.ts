@@ -10,6 +10,7 @@ import { BusService } from '../../services/bus.service';
 export class SettingsEditModal {
     public busSelected: Bus;
     public stations: Station;
+    public destinationSelected: string;
 
     static get parameters() {
         return [[NavParams], [ViewController], [BusService]];
@@ -25,9 +26,9 @@ export class SettingsEditModal {
         this.viewCtrl.dismiss();
     }
 
-    onDestinationSelected(destinationSelected: Destination) {
+    onDestinationSelected() {
         debugger;
-        this.srvBus.getStations("bus", destinationSelected.id).subscribe(
+        this.srvBus.getStations("bus", this.destinationSelected).subscribe(
             result => {
                 this.stations = result['stations']
             },

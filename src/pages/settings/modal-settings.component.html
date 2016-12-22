@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Arrêt & Destinations
+      Destinations & Arrêts
     </ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
@@ -13,13 +13,13 @@
 </ion-header>
 <ion-content>
   <ion-item>
-    <ion-label>Arrêt</ion-label>
-    <ion-select (ionChange)="onDestinationSelected(destination)">
+    <ion-label>Destinations</ion-label>
+    <ion-select (ionChange)="onDestinationSelected()" [(ngModel)]="destinationSelected">
       <ion-option *ngFor="let destination of busSelected.destinations" [value]="destination.id">{{destination.name}}</ion-option>
     </ion-select>
   </ion-item>
   <ion-item>
-    <ion-label>Destinations</ion-label>
+    <ion-label>Arrêts</ion-label>
     <ion-select>
       <ion-option *ngFor="let station of stations" [value]="station.id">{{station.name}}</ion-option>
     </ion-select>
