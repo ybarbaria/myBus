@@ -1,10 +1,11 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { ModalController, Platform, NavParams, ViewController, NavController } from 'ionic-angular';
+import { ModalController, NavController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { Bus } from '../../models/bus';
 import { BusService } from '../../services/bus.service';
 import { StorageService } from '../../services/storage.service';
 import { SettingsEditModal } from './modal-settings.component';
+import { Favorite } from '../../models/favorite';
 
 @Component({
     selector: 'settings',
@@ -62,8 +63,10 @@ export class SettingsPage implements AfterViewInit {
         let favoriteBusModal = this.modalCtrl.create(SettingsEditModal, { bus: bus });
 
         favoriteBusModal.present();
-
-        //this.srvStorage.storeBus(bus.line, bus.line, "", "");
-        //console.log(bus);
+        favoriteBusModal.onDidDismiss((data: Favorite) => {
+            if (data) {
+                this.srvStorage.storeBus(data.idBus, data.idBus, data.idStation, data.idDestination);
+            }
+        });
     }
 }

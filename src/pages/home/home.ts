@@ -4,6 +4,7 @@ import { NavController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { Schedule } from '../../models/schedule'
 import { ScheduleService } from '../../services/schedule.service'
+import { SettingsPage } from '../settings/settings.component';
 
 @Component({
   selector: 'page-home',
@@ -41,4 +42,9 @@ export class HomePage implements AfterViewInit {
         console.log(err);
       });
   }
+
+  onLoadSettings(): void {
+    this.navCtrl.push(SettingsPage);
+  }
+
 }

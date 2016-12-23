@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Bus, Destination } from '../../models/bus';
 import { Station } from '../../models/station';
 import { BusService } from '../../services/bus.service';
+import { Favorite } from '../../models/favorite';
 
 @Component({
     templateUrl: './modal-settings.component.html'
@@ -11,6 +12,8 @@ export class SettingsEditModal {
     public busSelected: Bus;
     public stations: Station;
     public destinationSelected: string;
+    public stationSelected: string;
+    private _favorite: Favorite;
 
     static get parameters() {
         return [[NavParams], [ViewController], [BusService]];
@@ -22,13 +25,12 @@ export class SettingsEditModal {
         this.busSelected = this.params.get("bus")
     }
 
-    close() {
+    close(): void {
         this.viewCtrl.dismiss();
     }
 
-    onDestinationSelected() {
-        debugger;
-        this.srvBus.getStations("bus", this.destinationSelected).subscribe(
+    onDestinationSelected(): void {
+        this.srvBus.getStations("bus", this.busSelected.line).subscribe(
             result => {
                 this.stations = result['stations']
             },
@@ -36,6 +38,15 @@ export class SettingsEditModal {
                 // Log errors if any
                 console.log(err);
             });
+    }
+
+    save(): void {
+        this._favorite = new Favorite();
+        this._favorite.idBus = this.busSelected.line;
+        this._favorite.idStation = this.stationSelected;
+        this._favorite.idDestination = this.destinationSelected;
+
+        this.viewCtrl.dismiss(this._favorite);
     }
 
 }

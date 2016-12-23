@@ -10,6 +10,7 @@ export class StorageService {
 
     public storeBus(idBus: string, nameBus: string, station: string, terminus: string): Promise<boolean> {
         return new Promise((resolve, reject) => {
+            debugger;
             NativeStorage.setItem(nameBus, { busNumber: idBus, stationName: station, terminusName: terminus })
                 .then(
                 () => {
@@ -24,12 +25,12 @@ export class StorageService {
     }
 
     public getBus(nameBuse: string): Promise<Object> {
-              return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             NativeStorage.getItem(nameBuse)
-            .then(
+                .then(
                 data => console.log(data),
                 error => console.error(error)
-            );
+                );
         });
-     }  
+    }
 }
