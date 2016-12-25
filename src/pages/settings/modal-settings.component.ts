@@ -40,6 +40,11 @@ export class SettingsEditModal {
             });
     }
 
+    dismiss() {
+        let data = { 'foo': 'bar' };
+        this.viewCtrl.dismiss(data);
+    }
+
     save(): void {
         this._favorite = new Favorite();
         this._favorite.idBus = this.busSelected.line;

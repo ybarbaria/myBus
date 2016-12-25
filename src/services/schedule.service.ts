@@ -7,11 +7,17 @@ import 'rxjs/Rx';
 @Injectable()
 export class ScheduleService {
 
-    private scheduleUrl = 'https://api-ratp.pierre-grimaud.fr/v2/bus/48/stations/3009?destination=195';  // URL to web API
+    private scheduleUrl = 'https://api-ratp.pierre-grimaud.fr/v2/{TypeLigne}/{LigneId}/stations/{StationId}?destination={DestinationId}';  // URL to web API
+    private scheduleUrlTest = 'https://api-ratp.pierre-grimaud.fr/v2/bus/48/stations/3009?destination=195';  // URL to web API
 
     constructor(private http: Http) { }
 
-    getSchedule(): Observable<Schedule[]> {
+    getSchedule(typeLigne: string, ligneId: string, stationId: string, destinationId: string): Observable<Schedule[]> {
+        this.scheduleUrl.replace("{TypeLigne}", typeLigne);
+        this.scheduleUrl.replace("{LigneId}", ligneId);
+        this.scheduleUrl.replace("{StationId}", stationId);
+        this.scheduleUrl.replace("{DestinationId}", destinationId);
+        
         return this.http.get(this.scheduleUrl)
             .map(this.extractData)
             .catch(this.handleError);
