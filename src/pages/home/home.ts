@@ -32,7 +32,7 @@ export class HomePage implements AfterViewInit {
 
   private _refreshSchedule() {
     this.stirageSrv.getBus("mybus").then((bus) => {
-      this.srvSchedule.getSchedule().subscribe(
+      this.srvSchedule.getSchedule("bus",bus.line, bus..subscribe(
         result => {
           this.listSchedule = result['schedules']
         }, //Bind to view

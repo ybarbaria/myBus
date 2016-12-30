@@ -1,6 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { ModalController, NavController } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
 import { Bus } from '../../models/bus';
 import { BusService } from '../../services/bus.service';
 import { StorageService } from '../../services/storage.service';
