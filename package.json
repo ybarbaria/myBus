@@ -37,11 +37,11 @@
     "cordova-plugin-statusbar",
     "cordova-plugin-device",
     "cordova-plugin-splashscreen",
+    "cordova-plugin-nativestorage",
     "ionic-plugin-keyboard"
   ],
   "cordovaPlatforms": [
-    "ios",
-    {
+    "ios", {
       "platform": "ios",
       "version": "",
       "locator": "ios"

@@ -1,25 +1,29 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { Bus } from '../../models/bus'
 import { BusService } from '../../services/bus.service'
 import { AlertController } from 'ionic-angular';
 import { StorageService } from '../../services/storage.service'
+import { SettingsEditModal } from './modal-settings.component';
+import { Favorite } from '../../models/favorite';
 
 @Component({
     selector: 'settings',
-    templateUrl: 'settings.html'
+    templateUrl: 'settings.component.html'
 })
 export class SettingsPage implements AfterViewInit {
 
-    private _searchQuery: string = '';
     private _listBusStorage: Array<Bus>;
+    private _busSelected: Bus;
     listBus: Array<Bus>;
 
     constructor(public navCtrl: NavController,
         private srvSchedule: BusService,
         private alertController: AlertController,
-        private storage: StorageService) {
+        private storage: StorageService,
+        private srvStorage: StorageService,
+        public modalCtrl: ModalController) {
         this._initializeItemsBus();
     }
 
@@ -58,12 +62,14 @@ export class SettingsPage implements AfterViewInit {
 
 
     public onAddToFavorite(bus: Bus) {
+        this._busSelected = bus;
+        let favoriteBusModal = this.modalCtrl.create(SettingsEditModal, { bus: bus });
 
-        //this.storage.storeBus(bus.line)
-        let alert = this.alertController.create({
-            title: 'Bus' + bus.line + ' ajouté'
+        favoriteBusModal.present();
+        favoriteBusModal.onDidDismiss((data: Favorite) => {
+            if (data) {
+                this.srvStorage.storeBus(data.idBus, data.idBus, data.idStation, data.idDestination);
+            }
         });
-        alert.present();
     }
-
 }

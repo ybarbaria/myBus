@@ -1,15 +1,13 @@
 <ion-content>
-
-    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-
-    <ion-list>
-        <ion-item-sliding *ngFor="let bus of listBus">
-            <ion-item>
-                  {{bus.line}}
-            </ion-item>
-            <ion-item-options side="left">
-                <button ion-button (click)="onAddToFavorite(bus)">Favorite</button>
-            </ion-item-options>
-        </ion-item-sliding>
-    </ion-list>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-list>
+    <ion-item-sliding *ngFor="let bus of listBus">
+      <ion-item>
+        {{bus.line}}
+      </ion-item>
+      <ion-item-options side="left">
+        <button ion-button (click)="onAddToFavorite(bus)">Favorite</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

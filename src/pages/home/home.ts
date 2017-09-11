@@ -4,6 +4,8 @@ import { NavController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { Schedule } from '../../models/schedule'
 import { ScheduleService } from '../../services/schedule.service'
+import { SettingsPage } from '../settings/settings.component';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'page-home',
@@ -11,14 +13,12 @@ import { ScheduleService } from '../../services/schedule.service'
 })
 export class HomePage implements AfterViewInit {
 
-  private _idStationMairie19eme = 3009;
-  private _idBus = 48;
-  private _idDestinationPalaisRoyal = 195;
   nomArret = "Mairie du 19ème";
   listSchedule: Array<Schedule>;
-  private _ticks = 0;
 
-  constructor(public navCtrl: NavController, private srvSchedule: ScheduleService) {
+  constructor(public navCtrl: NavController,
+    private srvSchedule: ScheduleService,
+    private stirageSrv: StorageService) {
   }
 
   ngAfterViewInit() {
@@ -31,14 +31,22 @@ export class HomePage implements AfterViewInit {
 
 
   private _refreshSchedule() {
+    this.stirageSrv.getBus("mybus").then((bus) => {
+      this.srvSchedule.getSchedule("bus",bus.line, bus..subscribe(
+        result => {
+          this.listSchedule = result['schedules']
+        }, //Bind to view
+        err => {
+          // Log errors if any
+          console.log(err);
+        });
 
-    this.srvSchedule.getSchedule().subscribe(
-      result => {
-        this.listSchedule = result['schedules']
-      }, //Bind to view
-      err => {
-        // Log errors if any
-        console.log(err);
-      });
+    });
+
   }
+
+  onLoadSettings(): void {
+    this.navCtrl.push(SettingsPage);
+  }
+
 }

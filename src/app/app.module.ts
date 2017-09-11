@@ -7,6 +7,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SettingsPage } from '../pages/settings/settings.component';
+import { SettingsEditModal } from '../pages/settings/modal-settings.component';
 import { ScheduleService } from '../services/schedule.service';
 import { BusService } from '../services/bus.service';
 import { StorageService } from '../services/storage.service';
@@ -19,7 +20,8 @@ import { HttpModule } from '@angular/http';
     ContactPage,
     HomePage,
     TabsPage,
-    SettingsPage
+    SettingsPage,
+    SettingsEditModal
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,8 @@ import { HttpModule } from '@angular/http';
     ContactPage,
     HomePage,
     TabsPage,
-    SettingsPage
+    SettingsPage,
+    SettingsEditModal
   ],
   providers: [
     ScheduleService,
