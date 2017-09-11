@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 @Injectable()
-export class ScheduleService {
+export class StorageService {
 
     constructor() { }
 

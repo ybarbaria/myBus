@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { Bus } from '../../models/bus'
 import { BusService } from '../../services/bus.service'
+import { AlertController } from 'ionic-angular';
+import { StorageService } from '../../services/storage.service'
 
 @Component({
     selector: 'settings',
@@ -14,7 +16,10 @@ export class SettingsPage implements AfterViewInit {
     private _listBusStorage: Array<Bus>;
     listBus: Array<Bus>;
 
-    constructor(public navCtrl: NavController, private srvSchedule: BusService) {
+    constructor(public navCtrl: NavController,
+        private srvSchedule: BusService,
+        private alertController: AlertController,
+        private storage: StorageService) {
         this._initializeItemsBus();
     }
 
@@ -53,7 +58,12 @@ export class SettingsPage implements AfterViewInit {
 
 
     public onAddToFavorite(bus: Bus) {
-        console.log(bus);
+
+        //this.storage.storeBus(bus.line)
+        let alert = this.alertController.create({
+            title: 'Bus' + bus.line + ' ajouté'
+        });
+        alert.present();
     }
 
 }
